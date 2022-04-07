@@ -1,8 +1,12 @@
 const choices = ["rock", "paper", "scissors"];
+const winners = [];
 
 // plays a game of rock-paper-scissors 5 times
 function game() {
-  playRound();
+  for (let i = 1; i <= 5; i++) {
+    playRound();
+  }
+  logWins();
 }
 
 // plays a single round of rock-paper-scissors
@@ -10,7 +14,7 @@ function playRound() {
   const playerSelection = playerChoice();
   const computerSelection = computerChoice();
   const winner = checkWinner(playerSelection, computerSelection);
-  console.log(winner);
+  winners.push(winner);
 }
 
 // get input from player
@@ -47,6 +51,7 @@ function validateInput(choice) {
   return false;
 }
 
+// declare winner
 function checkWinner(choiceP, choiceC) {
   if (choiceP === choiceC) {
     return "Tie!";
@@ -61,4 +66,16 @@ function checkWinner(choiceP, choiceC) {
   }
 }
 
+// log winner
+function logWins() {
+  let playerWins = winners.filter((item) => item == "Player wins!").length;
+  let computerWins = winners.filter((item) => item == "Computer wins!").length;
+  let ties = winners.filter((item) => item == "Tie!").length;
+  console.log("Results:");
+  console.log("Player wins:", playerWins);
+  console.log("Computer wins:", computerWins);
+  console.log("Ties:", ties);
+}
+
+// play rock-paper-scissors
 game();
